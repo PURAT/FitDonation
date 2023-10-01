@@ -2,6 +2,7 @@ package com.company.fitdonation.controller;
 
 import com.company.fitdonation.dto.OrganizationDto;
 import com.company.fitdonation.dto.UserDto;
+import com.company.fitdonation.repository.OrganizationRepository;
 import com.company.fitdonation.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class OrganizationController {
     private final OrganizationService organizationService;
 
     @GetMapping
-    public ResponseEntity<List<OrganizationDto>> getAllUsers() {
+    public ResponseEntity<List<OrganizationDto>> getAllOrganizations() {
         return ResponseEntity.ok(organizationService.getAllOrganizations());
     }
 

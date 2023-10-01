@@ -1,11 +1,13 @@
 package com.company.fitdonation.service;
 
 import com.company.fitdonation.dto.OrganizationDto;
-import com.company.fitdonation.dto.RegistrationRequest;
 import com.company.fitdonation.dto.UserDto;
 import com.company.fitdonation.entity.Organization;
+import com.company.fitdonation.entity.User;
 import com.company.fitdonation.mapper.OrganizationMapper;
+import com.company.fitdonation.mapper.UserMapper;
 import com.company.fitdonation.repository.OrganizationRepository;
+import com.company.fitdonation.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,6 @@ import java.util.stream.Collectors;
 public class OrganizationService {
 
     private final OrganizationRepository organizationRepository;
-
     private final OrganizationMapper organizationMapper;
 
     public List<OrganizationDto> getAllOrganizations() {
@@ -25,11 +26,4 @@ public class OrganizationService {
                 .map(organizationMapper::toDto)
                 .collect(Collectors.toList());
     }
-
-    public void update(OrganizationDto organization) {
-        organizationRepository.save(organizationMapper.toEntity(organization));
-    }
-
-
-
 }

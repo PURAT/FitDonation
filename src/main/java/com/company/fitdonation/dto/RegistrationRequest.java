@@ -35,4 +35,5 @@ public class RegistrationRequest {
 
     @NotBlank
     private String gender;
+
 }

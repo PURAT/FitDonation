@@ -4,13 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class UserDto {
+public class UserSummaryDto {
     private UUID id;
     private String firstname;
     private String lastname;
@@ -24,4 +23,5 @@ public class UserDto {
     private double height;
     private int age;
     private int points;
+    private FitnessActivitySummaryDto fitnessActivity;
 }

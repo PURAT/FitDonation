@@ -3,6 +3,7 @@ package com.company.fitdonation.service;
 import com.company.fitdonation.dto.AuthRequest;
 import com.company.fitdonation.dto.RegistrationRequest;
 import com.company.fitdonation.dto.UserDto;
+import com.company.fitdonation.dto.UserSummaryDto;
 import com.company.fitdonation.entity.Gender;
 import com.company.fitdonation.entity.Role;
 import com.company.fitdonation.entity.User;
@@ -11,8 +12,11 @@ import com.company.fitdonation.exception.NoSuchDataException;
 import com.company.fitdonation.mapper.UserMapper;
 import com.company.fitdonation.repository.UserRepository;
 import com.company.fitdonation.security.jwt.JwtProvider;
+import com.company.fitdonation.security.service.UserDetailsImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +31,7 @@ public class UserService {
     private final UserMapper mapper;
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
+    private final FitnessActivityService fitnessService;
 
     public void update(UserDto user) {
         userRepository.save(mapper.toEntity(user));
@@ -60,6 +65,12 @@ public class UserService {
         return userRepository.findAll().stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public UserSummaryDto getCurrentUser() {
+        String email = ((UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getDetails()).getUsername();
+        User currentUser = userRepository.findByEmail(email);
+        return mapper.toSummaryDto(mapper.toDto(currentUser), fitnessService.getLastUserActivity(currentUser.getId()));
     }
 
     public User getByEmail(String email) {

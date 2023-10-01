@@ -44,4 +44,16 @@ public class User {
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column(name = "weight")
+    private double weight;
+
+    @Column(name = "height")
+    private double height;
+
+    @Column(name = "age")
+    private int age;
+
+    @Column(name = "points")
+    private int points;
 }

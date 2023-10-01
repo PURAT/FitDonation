@@ -20,7 +20,7 @@ public class UserDetailsImpl implements UserDetails {
         UserDetailsImpl u = new UserDetailsImpl();
         u.email = user.getEmail();
         u.password = user.getPassword();
-        u.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName()));
+        u.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getRole()));
         return u;
     }
 

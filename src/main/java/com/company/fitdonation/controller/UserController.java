@@ -1,6 +1,7 @@
 package com.company.fitdonation.controller;
 
 import com.company.fitdonation.dto.UserDto;
+import com.company.fitdonation.dto.UserSummaryDto;
 import com.company.fitdonation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

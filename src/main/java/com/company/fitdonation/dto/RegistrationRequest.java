@@ -3,9 +3,8 @@ package com.company.fitdonation.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Column;
+import javax.validation.constraints.*;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -35,4 +34,16 @@ public class RegistrationRequest {
 
     @NotBlank
     private String gender;
+
+    @Positive
+    @Max(value = 500)
+    private double weight;
+
+    @Positive
+    @Max(value = 400)
+    private double height;
+
+    @Min(value = 18)
+    @Max(value = 150)
+    private int age;
 }
